@@ -2,14 +2,16 @@ from flask import Flask, render_template, request, redirect, session, url_for, R
 from functools import wraps
 import sqlite3
 from collections import Counter
+from dotenv import load_dotenv
 import os
 
 app = Flask(__name__)
 app.secret_key = 'super-secret-key-2025'
 
 # Данные администратора (из переменных окружения)
+load_dotenv()
 ADMIN_USERNAME = os.environ.get('ADMIN_USERNAME', 'Dmitriy')
-ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD', 'D607206fd-')
+ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD', '16343863')
 
 # ============= РАСШИРЕННОЕ МЕНЮ (16 позиций, 5 категорий) =============
 menu = [
