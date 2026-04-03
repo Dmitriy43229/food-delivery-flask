@@ -8,10 +8,12 @@ import os
 app = Flask(__name__)
 app.secret_key = 'super-secret-key-2025'
 
-# Данные администратора (из переменных окружения)
+# Загрузка переменных из .env
 load_dotenv()
-ADMIN_USERNAME = os.environ.get('ADMIN_USERNAME', 'Dmitriy')
-ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD', '16343863')
+
+# Данные администратора (из переменных окружения)
+ADMIN_USERNAME = os.environ.get('ADMIN_USERNAME', 'admin')
+ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD', '')
 
 # ============= РАСШИРЕННОЕ МЕНЮ (16 позиций, 5 категорий) =============
 menu = [
