@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>📝 Оформление заказа</h1>
+
+<div class="order-form">
+    <form method="POST" action="/place_order">
+        <input type="text" name="name" placeholder="Ваше имя" required>
+        <input type="tel" name="phone" placeholder="Номер телефона" required>
+        <textarea name="address" placeholder="Адрес доставки" rows="3" required></textarea>
+        <textarea name="comment" placeholder="Комментарий к заказу (пожелания, время доставки)" rows="2"></textarea>
+        <button type="submit" class="btn-success">✅ Подтвердить заказ</button>
+    </form>
+</div>
+
+<a href="/cart" class="btn">← Вернуться в корзину</a>
+{% endblock %}

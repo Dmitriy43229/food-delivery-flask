@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="success-message">
+    <h2>✅ Заказ успешно оформлен!</h2>
+    <p>Номер вашего заказа: <strong>#{{ order_id }}</strong></p>
+    <p>Мы свяжемся с вами в ближайшее время для подтверждения.</p>
+    <br>
+    <a href="/" class="btn">🍕 Вернуться в меню</a>
+</div>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>👑 Панель администратора
+    <a href="/admin/logout" style="background:#c1121f; color:white; padding:8px 20px; border-radius:30px; float:right; text-decoration:none; font-size:16px;">🚪 Выйти</a>
+</h1>
+
+<table class="admin-table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Клиент</th>
+            <th>Телефон</th>
+            <th>Адрес</th>
+            <th>Заказ</th>
+            <th>Сумма</th>
+            <th>Статус</th>
+            <th>Комментарий</th>
+            <th>Действие</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for order in orders %}
+    <tr>
+        <td>{{ order.id }}</td>
+        <td>{{ order.customer_name }}</td>
+        <td>{{ order.customer_phone }}</td>
+        <td>{{ order.customer_address }}</td>
+        <td>{{ order.order_items }}</td>
+        <td>{{ order.total_price }} ₽</td>
+        <td>
+            {% if order.status == 'Новый' %}
+                <span style="background:#ffcc00; padding:5px 10px; border-radius:20px;">{{ order.status }}</span>
+            {% elif order.status == 'Готовится' %}
+                <span style="background:#ff9800; padding:5px 10px; border-radius:20px;">{{ order.status }}</span>
+            {% elif order.status == 'Доставка' %}
+                <span style="background:#2196f3; padding:5px 10px; border-radius:20px; color:white;">{{ order.status }}</span>
+            {% else %}
+                <span style="background:#4caf50; padding:5px 10px; border-radius:20px; color:white;">{{ order.status }}</span>
+            {% endif %}
+        </td>
+        <td>{{ order.comment or '-' }}</td>
+        <td>
+            <select onchange="window.location.href='/update_status/{{ order.id }}/'+this.value" style="padding:5px; border-radius:10px;">
+                <option value="Новый" {% if order.status == 'Новый' %}selected{% endif %}>🟡 Новый</option>
+                <option value="Готовится" {% if order.status == 'Готовится' %}selected{% endif %}>🟠 Готовится</option>
+                <option value="Доставка" {% if order.status == 'Доставка' %}selected{% endif %}>🔵 Доставка</option>
+                <option value="Выполнен" {% if order.status == 'Выполнен' %}selected{% endif %}>✅ Выполнен</option>
+            </select>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>🛒 Моя корзина</h1>
+
+{% if items %}
+    {% for item in items %}
+    <div class="cart-item">
+        <div>
+            <strong>{{ item.name }}</strong><br>
+            {{ item.price }} ₽ × {{ item.quantity }} = {{ item.total }} ₽
+        </div>
+        <a href="/remove_from_cart/{{ item.id }}" class="btn btn-danger">🗑 Удалить</a>
+    </div>
+    {% endfor %}
+    
+    <div class="cart-summary">
+        <h3>💰 Итого: {{ total }} ₽</h3>
+        <a href="/clear_cart" class="btn btn-danger">🧹 Очистить корзину</a>
+        <a href="/order" class="btn btn-success">📦 Оформить заказ</a>
+    </div>
+{% else %}
+    <div class="empty-cart">
+        <p>🛒 Корзина пуста</p>
+        <p>Добавьте вкусняшки из <a href="/">меню</a>!</p>
+    </div>
+{% endif %}
+
+<a href="/" class="btn">← Вернуться в меню</a>
+{% endblock %}

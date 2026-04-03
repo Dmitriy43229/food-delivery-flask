@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🍕 Доставка вкусной еды</title>
+    <meta charset="UTF-8">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #fef9e8;
+            color: #2c3e2f;
+            min-height: 100vh;
+        }
+        
+        .nav {
+            background: #ff8c42;
+            padding: 15px 30px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav a {
+            color: white;
+            margin-right: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            padding: 8px 12px;
+            border-radius: 25px;
+            transition: background 0.3s;
+        }
+        
+        .nav a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .cart-badge {
+            background: #e63946;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 8px;
+            font-size: 0.8em;
+            margin-left: 5px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        
+        h1 {
+            color: #d45a1a;
+            border-left: 6px solid #ff8c42;
+            padding-left: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .btn, button {
+            background: #ff8c42;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn:hover, button:hover {
+            background: #e6732e;
+            transform: scale(1.02);
+        }
+        
+        .btn-danger {
+            background: #e63946;
+        }
+        
+        .btn-danger:hover {
+            background: #c1121f;
+        }
+        
+        .btn-success {
+            background: #2a9d8f;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: 0.3s;
+            text-align: center;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .card h3 {
+            color: #d45a1a;
+            margin-bottom: 10px;
+        }
+        
+        .card .category {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        
+        .card .price {
+            font-size: 1.5em;
+            color: #2a9d8f;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .category-filter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+            padding: 15px;
+            background: white;
+            border-radius: 50px;
+            justify-content: center;
+        }
+        
+        .category-btn {
+            background: #f0f0f0;
+            color: #333;
+            padding: 8px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        
+        .category-btn:hover, .category-btn.active {
+            background: #ff8c42;
+            color: white;
+        }
+        
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .admin-table th {
+            background: #ff8c42;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .admin-table td {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .admin-table tr:hover {
+            background: #fef4e8;
+        }
+        
+        .order-form {
+            background: white;
+            padding: 30px;
+            border-radius: 25px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .order-form input, .order-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 30px;
+            border: 1px solid #ddd;
+            font-family: inherit;
+        }
+        
+        .order-form textarea {
+            border-radius: 20px;
+            resize: vertical;
+        }
+        
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 30px auto;
+            max-width: 500px;
+        }
+        
+        .empty-cart {
+            text-align: center;
+            padding: 50px;
+            background: white;
+            border-radius: 25px;
+        }
+        
+        .cart-item {
+            background: white;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .cart-summary {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            text-align: right;
+        }
+        
+        @media (max-width: 768px) {
+            .nav a {
+                margin-right: 10px;
+                font-size: 0.9em;
+            }
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a href="/">🍽 Меню</a>
+        <a href="/cart">
+            🛒 Корзина
+            {% if cart_count is defined and cart_count > 0 %}
+            <span class="cart-badge">{{ cart_count }}</span>
+            {% endif %}
+        </a>
+        <a href="/admin">👑 Админ</a>
+    </div>
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Вход в админ-панель</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ff8c42 0%, #ff6b2b 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .login-container {
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        
+        h1 {
+            color: #d45a1a;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        input {
+            width: 100%;
+            padding: 14px;
+            margin: 10px 0;
+            border: 2px solid #eee;
+            border-radius: 30px;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #ff8c42;
+        }
+        
+        button {
+            width: 100%;
+            background: #ff8c42;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+        
+        button:hover {
+            background: #e6732e;
+            transform: scale(1.02);
+        }
+        
+        .error {
+            background: #fee;
+            color: #c1121f;
+            padding: 12px;
+            border-radius: 30px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            color: #999;
+            text-decoration: none;
+        }
+        
+        .back-link:hover {
+            color: #ff8c42;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>👑 Админ-панель</h1>
+        <div class="subtitle">Введите логин и пароль</div>
+        
+        {% if error %}
+        <div class="error">{{ error }}</div>
+        {% endif %}
+        
+        <form method="POST">
+            <input type="text" name="username" placeholder="Логин" required autofocus>
+            <input type="password" name="password" placeholder="Пароль" required>
+            <button type="submit">Войти</button>
+        </form>
+        
+        <a href="/" class="back-link">← Вернуться на главную</a>
+    </div>
+</body>
+</html>

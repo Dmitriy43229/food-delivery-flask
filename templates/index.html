@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>🍕 Наше меню</h1>
+
+<!-- Фильтр по категориям -->
+<div class="category-filter">
+    <a href="/" class="category-btn {% if not active_category %}active{% endif %}">📋 Все</a>
+    {% for cat, cat_ru in categories.items() %}
+    <a href="/category/{{ cat }}" class="category-btn {% if active_category == cat %}active{% endif %}">{{ cat_ru }}</a>
+    {% endfor %}
+</div>
+
+<div class="menu-grid">
+    {% for item in menu %}
+    <div class="card">
+        <h3>{{ item.name }}</h3>
+        <div class="category">{{ item.category_ru }}</div>
+        <div class="price">{{ item.price }} ₽</div>
+        <a href="/add_to_cart/{{ item.id }}" class="btn">➕ Добавить в корзину</a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
